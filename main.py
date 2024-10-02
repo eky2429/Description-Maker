@@ -1,23 +1,17 @@
 import os
 
+#Stores directory to look into
+directory_path = r"D:\Youtube.dra\MediaFiles\OG Library\Music"
+#Stores the separator to use
+separator = "\\"
+
 music = []
 
-
 def getFileName(file_path : str) -> str:
-    #Find index of last /
-    slash_index = 0
-    for i in range(-1, -len(file_path) - 1):
-        if file_path[i] == "/":
-            slash_index = len(file_path) - i
-
-    #Find index of last .
-    dot_index = 0
-    for i in range(-1, -len(file_path) - 1):
-        if file_path[i] == ".":
-            slash_index = len(file_path) - i
-
-    #find index of last
-    return file_path[slash_index + 1:dot_index]
+    dirs = file_path.split(separator)
+    file = dirs[-1]
+    #Omits last part of file extension
+    return file[0:-4]
 
 #Iterates through directories in file
 def list_files_recursive(path='.'):
@@ -27,9 +21,9 @@ def list_files_recursive(path='.'):
         #Checks if path leads to a directory
         if os.path.isdir(full_path):
             list_files_recursive(full_path)
-        elif full_path.endswith(".mp3"):
+        elif "Music" in full_path:
             if "Kevin Macleod" in full_path:
-                music.append("Kevin Macleod - " + getFileName(full_path))
+                music.append(getFileName(full_path) + " - Kevin Macleod")
             else:
                 music.append(getFileName(full_path))
         #Checks if path is in fact a file
@@ -37,6 +31,9 @@ def list_files_recursive(path='.'):
             pass
 
 # Specify the directory path you want to start from
-directory_path = './'
-directory_path = input("Type in file path: ")
+# directory_path = input("Type in file path: ")
 list_files_recursive(directory_path)
+music = sorted(music)
+
+for track in music:
+    print(track)
