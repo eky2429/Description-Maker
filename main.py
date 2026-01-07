@@ -1,7 +1,7 @@
 import os
 
 #Stores directory to look into
-directory_path = r"C:\Users\eky38\Videos\Mikeeey Schoolboy runaway.dra\MediaFiles\OG Library"
+directory_path = r""
 
 #Stores the separator to use
 separator = "\\"
